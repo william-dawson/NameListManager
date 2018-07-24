@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- An example input file for processing -->
+<input>
+  <int2>
+    <description language="english">
+      A module storing information about how two electron integrals are
+      computed.
+    </description>
+    <inttype>
+      <datatype>string</datatype>
+      <description>Algorithm for computing two electron integrals.</description>
+      <default>md4</default>
+    </inttype>
+    <pscreen>
+      <datatype>logical</datatype>
+      <description>Whether to do screening or not.</description>
+      <default>.false.</default>
+    </pscreen>
+  </int2>
+  <dft>
+    <description language="english">
+      A module for storing information about DFT calculations.
+    </description>
+    <ctype>
+      <datatype>string</datatype>
+      <description>Type of correlation.</description>
+      <default>P86</default>
+    </ctype>
+    <xtype>
+      <datatype>string</datatype>
+      <description>Type of exchange.</description>
+      <default>Becke</default>
+    </xtype>
+  </dft>
+  <scf>
+    <description language="english">
+      A module for storing information about the scf iteration proceeds.
+      This includes options for what type of approximation to use.
+    </description>
+    <scftype>
+      <datatype>string</datatype>
+      <description>Whether to do restricted or unrestricted.</description>
+      <default>rhf</default>
+    </scftype>
+    <coulomb>
+      <datatype>string</datatype>
+      <description>How to compute the coulomb contribution.</description>
+      <default>analytic</default>
+    </coulomb>
+    <exchange>
+      <datatype>string</datatype>
+      <description>How to compute the exchange contribution.</description>
+      <default>none</default>
+    </exchange>
+    <threshold>
+      <datatype>real(8)</datatype>
+      <description>
+        The threshold for convergence of the density matrix.
+      </description>
+      <default>1e-5</default>
+    </threshold>
+    <max_iterations>
+      <datatype>integer</datatype>
+      <description>Maximum SCF iterations to perform.</description>
+      <default>100</default>
+    </max_iterations>
+  </scf>
+</input>
