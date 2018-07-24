@@ -3,6 +3,7 @@ This file contains the procedures needed to generate documentation from the
 xml file.
 '''
 
+
 def create_doc(module, output_path):
     '''
     Create the documentation associated with a given module.
@@ -19,9 +20,9 @@ def create_doc(module, output_path):
         print("Couldn't open file:", file_name)
         quit()
 
-    head = mod_name.upper()+" Module"
-    ofile.write(head+"\n")
-    ofile.write("="*len(head)+"\n\n")
+    head = mod_name.upper() + " Module"
+    ofile.write(head + "\n")
+    ofile.write("=" * len(head) + "\n\n")
     write_description(ofile, module.find("description").text)
     ofile.write("\n")
 
@@ -29,14 +30,16 @@ def create_doc(module, output_path):
         if member.tag == "description":
             continue
         head = member.tag.upper()
-        ofile.write(head+"\n")
-        ofile.write("-"*len(head)+"\n")
+        ofile.write(head + "\n")
+        ofile.write("-" * len(head) + "\n")
         write_description(ofile, member.find("description").text)
-        ofile.write("  - Default: "+member.find("default").text+"\n")
-        ofile.write("  - DataType: "+member.find("datatype").text+"\n")
+        ofile.write("  - Default: " + member.find("default").text + "\n")
+        ofile.write("  - DataType: " + member.find("datatype").text + "\n")
         ofile.write("\n")
 
+    # Cleanup
     ofile.close()
+
 
 def write_description(ofile, description):
     '''
@@ -52,7 +55,7 @@ def write_description(ofile, description):
     start_idx = text.find("\n")
     while(start_idx != -1):
         substr = "\n"
-        for end_idx in range(start_idx+1, len(text)):
+        for end_idx in range(start_idx + 1, len(text)):
             if text[end_idx] != " ":
                 break
             else:
@@ -67,7 +70,7 @@ def write_description(ofile, description):
         if end > len(text):
             end = len(text)
         else:
-            while(text[end-1] != " " and end > start):
+            while(text[end - 1] != " " and end > start):
                 end -= 1
-        ofile.write(text[start:end]+"\n")
+        ofile.write(text[start:end] + "\n")
         start = end

@@ -1,5 +1,5 @@
 '''
-Generates code and documentation from a a Fortran namelist.
+Generates code and documentation for a Fortran namelist.
 
 Usage:
     python generate.py input.xml doc_path mod_path read_path
@@ -12,9 +12,12 @@ Usage:
 from sys import argv
 from src.documentation import create_doc
 from src.module import create_mod
+from src.readers import create_reader
 import xml.etree.ElementTree as ET
 
 if __name__ == "__main__":
+    if len(argv) < 5:
+        raise Exception("Incorrect input parameters.")
     fname = argv[1]
     doc_path = argv[2]
     mod_path = argv[3]
@@ -31,3 +34,4 @@ if __name__ == "__main__":
     for module in root:
         create_doc(module, doc_path)
         create_mod(module, mod_path)
+        create_reader(module, read_path)

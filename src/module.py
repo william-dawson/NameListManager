@@ -10,8 +10,9 @@ def create_mod(module, output_path):
     module: a tree of elements associated with that module.
     output_path: path to where we should put the output file.
     '''
+
     mod_name = module.tag
-    file_name = output_path + "/" + mod_name + ".f90"
+    file_name = output_path + "/" + mod_name + "_input_module.f90"
 
     try:
         ofile = open(file_name, "w")
@@ -44,6 +45,8 @@ def create_mod(module, output_path):
     # Footer
     ofile.write("!\n")
     ofile.write(off+"END MODULE")
+
+    # Cleanup
     ofile.close()
 
 def write_comment(ofile, description, off):
@@ -52,6 +55,7 @@ def write_comment(ofile, description, off):
 
     ofile: output stream.
     description: text to write
+    off: the offset for comments between the ! and the text.
     '''
 
     text = description.lstrip().rstrip()
@@ -68,7 +72,7 @@ def write_comment(ofile, description, off):
         text = text.replace(substr, " ")
         start_idx = text.find("\n")
 
-    # Make sure it prints in chunks of 70 characters
+    # Make sure it prints in chunks of 72 - offset characters
     start = 0
     while (start < len(text)):
         end = start + 72 - len(off)

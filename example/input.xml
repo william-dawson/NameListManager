@@ -3,8 +3,7 @@
 <input>
   <int2>
     <description language="english">
-      A module storing information about how two electron integrals are
-      computed.
+      A module storing information about how two electron integrals are computed.
     </description>
     <inttype>
       <datatype>string</datatype>
@@ -17,6 +16,7 @@
       <default>.false.</default>
     </pscreen>
   </int2>
+
   <dft>
     <description language="english">
       A module for storing information about DFT calculations.
@@ -32,10 +32,10 @@
       <default>Becke</default>
     </xtype>
   </dft>
+
   <scf>
     <description language="english">
-      A module for storing information about the scf iteration proceeds.
-      This includes options for what type of approximation to use.
+      A module for storing information about the scf iteration proceeds. This includes options for what type of approximation to use.
     </description>
     <scftype>
       <datatype>string</datatype>
@@ -64,5 +64,20 @@
       <description>Maximum SCF iterations to perform.</description>
       <default>100</default>
     </max_iterations>
+    <direct>
+      <datatype>logical</datatype>
+      <description>
+        Whether or not to use a direct or disk algorithm for calculations.
+      </description>
+      <default>T</default>
+    </direct>
+    <maxdiis>
+      <datatype>integer</datatype>
+      <description>
+        The maximum number of past density matrices to store for DIIS.
+      </description>
+      <default>4</default>
+    </maxdiis>
   </scf>
+
 </input>
