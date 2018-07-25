@@ -13,8 +13,8 @@ setup(name='namelistmanager',
           'lxml',
       ],
       entry_points={
-        'console_scripts': [
-          'namelistmanager = namelistmanager.__main__:main'
-        ]
+          'console_scripts': [
+              'namelistmanager = namelistmanager.__main__:main'
+          ]
       },
       python_requires=">=3.0")

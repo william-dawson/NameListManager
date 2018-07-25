@@ -52,6 +52,9 @@ def create_reader(module, output_path):
     write_list(ofile, entry_list, offcont)
     ofile.write("!\n")
 
+    # First we set the default values.
+    default_values(ofile, module.find("element_list"))
+
     # Open the file
     ofile.write("!"+offcom+"Open the input file\n")
     txt = "OPEN(UNIT=IO, FILE=fname, STATUS='OLD', " + \
@@ -120,3 +123,19 @@ def write_list(ofile, text, off):
             ofile.write("&\n")
         else:
             ofile.write("\n")
+
+def default_values(ofile, module):
+    '''Write code to fill in all the default values of variables.
+
+    ofile: file stream to write to.
+    module: module to write.
+    '''
+    ofile.write("!"+offcom+"Fill in the default values.\n")
+    for element in module:
+        ofile.write(off+element.attrib["name"] + " = ")
+        if element.find("datatype").text != "string":
+            ofile.write(element.find("default").text)
+        else:
+            ofile.write("\""+element.find("default").text+"\"")
+        ofile.write("\n")
+    ofile.write("!\n")
