@@ -8,7 +8,7 @@ from .modules import create_mod
 from .readers import create_reader
 from .common import create_common
 from lxml import etree
-
+from pkg_resources import resource_filename
 
 def Parse(fname, doc_path, mod_path, read_path):
     '''
@@ -28,7 +28,8 @@ def Parse(fname, doc_path, mod_path, read_path):
         quit()
 
     # Validate the input file
-    xmlschema = etree.parse("namelistmanager/namelist.xsd")
+    schema_file = resource_filename('namelistmanager', 'data/namelist.xsd')
+    xmlschema = etree.parse(schema_file)
     xmlschema = etree.XMLSchema(xmlschema)
     xmlschema.assertValid(tree)
 
