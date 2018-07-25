@@ -29,7 +29,6 @@ def create_common(output_path):
     ofile.write("!\n")
 
     # Common members
-    ofile.write(off + "INTEGER, PARAMETER :: fname_len = 80\n")
     ofile.write(off + "INTEGER, PARAMETER :: instr_len = 20\n")
     ofile.write("!\n")
 
@@ -41,7 +40,7 @@ def create_common(output_path):
     ofile.write("!" + offcom + "If there is an I/O error, call this routine.\n")
     ofile.write(off + "SUBROUTINE HandleError(fname)\n")
     ofile.write("!\n")
-    ofile.write(off + "CHARACTER(len=fname_len), INTENT(IN) :: fname\n")
+    ofile.write(off + "CHARACTER(len=*), INTENT(IN) :: fname\n")
     ofile.write("!\n")
     ofile.write(off + "WRITE(*,*) \"Problem with file \", fname\n")
     ofile.write(off + "CALL EXIT(-1)\n")

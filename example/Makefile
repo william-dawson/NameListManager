@@ -26,3 +26,6 @@ clean:
 	   driver/*.o modules/*.mod modules/*.o \
      readers/*.mod readers/*.o \
 		 example
+
+test:
+	./example
