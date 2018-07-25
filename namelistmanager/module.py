@@ -26,6 +26,8 @@ def create_mod(module, output_path):
     write_comment(ofile, module.find("description_list"), offcom)
     ofile.write(off+"MODULE "+mod_name.upper()+"InputModule"+"\n")
     ofile.write("!\n")
+    ofile.write(off + "USE IOCommonModule, ONLY : instr_len\n")
+    ofile.write("!\n")
     ofile.write(off+"IMPLICIT NONE\n")
     ofile.write("!\n")
 
@@ -36,7 +38,7 @@ def create_mod(module, output_path):
         # Write Variable
         datatype = member.find("datatype").text.upper()
         if datatype == "STRING":
-            datatype = "CHARACTER(LEN=20)"
+            datatype = "CHARACTER(LEN=instr_len)"
         name = member.attrib["name"]
         ofile.write(off+datatype+" :: "+name+"\n")
 

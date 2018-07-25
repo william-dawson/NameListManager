@@ -32,6 +32,7 @@ def create_reader(module, output_path):
     ofile.write("!\n")
 
     # Use Statements
+    ofile.write(off + "USE IOCommonModule, ONLY : HandleError, fname_len\n")
     ofile.write(off + "USE " + mod_name.upper() + "Module, ONLY : &\n")
     entry_list = variable_list(module)
     entry_list = ", ".join(entry_list)
@@ -43,7 +44,7 @@ def create_reader(module, output_path):
     ofile.write("!\n")
 
     # Input variables
-    ofile.write(off + "CHARACTER(len=80), INTENT(IN) :: fname\n")
+    ofile.write(off + "CHARACTER(len=fname_len), INTENT(IN) :: fname\n")
     ofile.write("!\n")
 
     # Helper Variables
@@ -76,6 +77,7 @@ def create_reader(module, output_path):
     # Error Handling At The End
     ofile.write("!"+offcom+"Error Handling\n")
     ofile.write(offlabel+"100 CONTINUE\n")
+    ofile.write(off+"CALL HandleError(input_file)\n")
 
     # Footer
     ofile.write(offlabel+"200 CONTINUE\n")
