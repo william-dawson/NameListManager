@@ -27,7 +27,9 @@ You can run the examples using the following command::
 
 The documentation, module files, and readers will then be available in the
 example directory. The documentation files are restructed text, which means
-you could easily add them to a Sphinx project
+you could easily add them to a Sphinx project. There is also a sample
+driver program and makefile available in the `examples` directory, so you
+can test out the code.
 
 Requirements
 ------------
