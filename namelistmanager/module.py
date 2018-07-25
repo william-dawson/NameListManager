@@ -11,7 +11,7 @@ def create_mod(module, output_path):
     output_path: path to where we should put the output file.
     '''
 
-    mod_name = module.tag
+    mod_name = module.attrib["name"]
     file_name = output_path + "/" + mod_name + "_input_module.f90"
 
     try:
@@ -39,7 +39,7 @@ def create_mod(module, output_path):
         datatype = member.find("datatype").text.upper()
         if datatype == "STRING":
             datatype = "CHARACTER(LEN=20)"
-        name = member.tag
+        name = member.attrib["name"]
         ofile.write(off+datatype+" :: "+name+"\n")
 
     # Footer

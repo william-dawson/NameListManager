@@ -11,7 +11,7 @@ def create_doc(module, output_path):
     module: a tree of elements associated with that module.
     output_path: path to where we should put the output file.
     '''
-    mod_name = module.tag
+    mod_name = module.attrib["name"]
     file_name = output_path + "/" + mod_name + ".rst"
 
     try:
@@ -29,7 +29,8 @@ def create_doc(module, output_path):
     for member in module:
         if member.tag == "description":
             continue
-        head = member.tag.upper()
+        mem_name = member.attrib["name"]
+        head = mem_name.upper()
         ofile.write(head + "\n")
         ofile.write("-" * len(head) + "\n")
         write_description(ofile, member.find("description").text)

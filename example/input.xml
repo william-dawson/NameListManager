@@ -1,83 +1,85 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- An example input file for processing -->
 <input>
-  <int2>
+  <group name="int2">
     <description language="english">
-      A module storing information about how two electron integrals are computed.
+      A module storing information about how two electron integrals are
+      computed.
     </description>
-    <inttype>
+    <element name="inttype">
       <datatype>string</datatype>
       <description>Algorithm for computing two electron integrals.</description>
       <default>md4</default>
-    </inttype>
-    <pscreen>
+    </element>
+    <element name="pscreen">
       <datatype>logical</datatype>
       <description>Whether to do screening or not.</description>
       <default>.false.</default>
-    </pscreen>
-  </int2>
+    </element>
+  </group>
 
-  <dft>
+  <group name="dft">
     <description language="english">
       A module for storing information about DFT calculations.
     </description>
-    <ctype>
+    <element name="ctype">
       <datatype>string</datatype>
       <description>Type of correlation.</description>
       <default>P86</default>
-    </ctype>
-    <xtype>
+    </element>
+    <element name="xtype">
       <datatype>string</datatype>
       <description>Type of exchange.</description>
       <default>Becke</default>
-    </xtype>
-  </dft>
+    </element>
+  </group>
 
-  <scf>
+  <group name="scf">
     <description language="english">
-      A module for storing information about the scf iteration proceeds. This includes options for what type of approximation to use.
+      A module for storing information about the scf iteration proceeds.
+      This includes options for what type of approximation to use.
     </description>
-    <scftype>
+    <element name="scftype">
       <datatype>string</datatype>
       <description>Whether to do restricted or unrestricted.</description>
       <default>rhf</default>
-    </scftype>
-    <coulomb>
+    </element>
+    <element name="coulomb">
       <datatype>string</datatype>
       <description>How to compute the coulomb contribution.</description>
       <default>analytic</default>
-    </coulomb>
-    <exchange>
+    </element>
+    <element name="exchange">
       <datatype>string</datatype>
       <description>How to compute the exchange contribution.</description>
       <default>none</default>
-    </exchange>
-    <threshold>
+    </element>
+    <element name="threshold">
       <datatype>real(8)</datatype>
       <description>
         The threshold for convergence of the density matrix.
       </description>
       <default>1e-5</default>
-    </threshold>
-    <max_iterations>
+    </element>
+    <element name="max_iterations">
       <datatype>integer</datatype>
       <description>Maximum SCF iterations to perform.</description>
       <default>100</default>
-    </max_iterations>
-    <direct>
+    </element>
+    <element name="direct">
       <datatype>logical</datatype>
       <description>
         Whether or not to use a direct or disk algorithm for calculations.
       </description>
       <default>T</default>
-    </direct>
-    <maxdiis>
+    </element>
+    <element name="maxdiis">
       <datatype>integer</datatype>
       <description>
         The maximum number of past density matrices to store for DIIS.
       </description>
       <default>4</default>
-    </maxdiis>
-  </scf>
+    </element>
+  </group>
 
 </input>

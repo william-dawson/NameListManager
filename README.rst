@@ -15,14 +15,52 @@ xml file, and it automatically generates:
 
 You run the program as::
 
-  python generate.py input.xml doc_path mod_path read_path
+  python namelistmanager input.xml doc_path mod_path read_path
 
 You can run the examples using the following command::
 
-  python generate.py example/input.xml example/doc example/module example/readers
+  python namelistmanager example/input.xml example/doc example/module example/readers
 
 The documentation, module files, and readers will then be available in the
 example directory.
 
 XML File Details
 ----------------
+
+The XML is used to describe the different input variables available in the
+namelist. To begin your xml file, wrap everything in the input tag::
+
+  <input>
+  ...
+  </input>
+
+Inside `<input>` you can place different groups. For each group, a module
+will be created to store the data of that group, and a reader for that group
+as well. Each group is identified by the name attribute::
+
+  <group name="">
+  </group>
+
+Inside each group, you need to provide a description of that group.
+
+  <description>
+  </description>
+
+Next you specify the elements of that group. The variable name associated with
+that element is based on the name attribute. Each element also requires a
+description of that variable. You also need to specify the data type and
+the default value::
+
+  <element name="">
+    <description></description>
+    <datatype></datatype>
+    <default></default>
+  </element>
+
+Any XML file you create can be validated against the XML schema stored in
+`namelist.xsd` .
+
+Additional Options
+------------------
+
+There are a few more options you might want to specify. 

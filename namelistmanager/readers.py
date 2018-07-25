@@ -11,7 +11,7 @@ def create_reader(module, output_path):
     module: a tree of elements associated with that module.
     output_path: path to where we should put the output file.
     '''
-    mod_name = module.tag
+    mod_name = module.attrib["name"]
     file_name = output_path + "/" + mod_name + "_reader.f90"
 
     try:
@@ -96,7 +96,7 @@ def variable_list(module):
     for member in module:
         if member.tag == "description":
             continue
-        member_list.append(member.tag.upper())
+        member_list.append(member.attrib["name"].upper())
     return member_list
 
 
