@@ -10,10 +10,10 @@ Usage:
 
 '''
 from sys import argv
-from src.documentation import create_doc
-from src.module import create_mod
-from src.readers import create_reader
-from src.common import create_common
+from .documentation import create_doc
+from .module import create_mod
+from .readers import create_reader
+from .common import create_common
 import xml.etree.ElementTree as ET
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
-# Name List Manager
+Name List Manager
+=================
 
 This program automatically generates code and documentation for Fortran
 programs that manage their input using namelists. To use it, you first write an
@@ -12,15 +13,16 @@ xml file, and it automatically generates:
 -   Reader subroutines that read in data from a namelist specifying input
     values.
 
-You run the program as:
+You run the program as::
 
-> python generate.py input.xml doc_path mod_path read_path
+  python generate.py input.xml doc_path mod_path read_path
 
-You can run the examples using the following command:
+You can run the examples using the following command::
 
-> python generate.py example/input.xml example/doc example/module example/readers
+  python generate.py example/input.xml example/doc example/module example/readers
 
 The documentation, module files, and readers will then be available in the
 example directory.
 
-## XML File Details
+XML File Details
+----------------
