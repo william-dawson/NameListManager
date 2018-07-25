@@ -23,18 +23,16 @@ def create_mod(module, output_path):
     # Header
     off = " "*6
     offcom = " "*5
-    write_comment(ofile, module.find("description").text, offcom)
+    write_comment(ofile, module.find("description_list"), offcom)
     ofile.write(off+"MODULE "+mod_name.upper()+"InputModule"+"\n")
     ofile.write("!\n")
     ofile.write(off+"IMPLICIT NONE\n")
     ofile.write("!\n")
 
     # Members
-    for member in module:
-        if member.tag == "description":
-            continue
+    for member in module.find("element_list"):
         # Write the description
-        write_comment(ofile, member.find("description").text, offcom)
+        write_comment(ofile, member.find("description_list"), offcom)
         # Write Variable
         datatype = member.find("datatype").text.upper()
         if datatype == "STRING":
@@ -49,37 +47,38 @@ def create_mod(module, output_path):
     # Cleanup
     ofile.close()
 
-def write_comment(ofile, description, off):
+def write_comment(ofile, description_list, off):
     '''
     A subroutine that writes out a comment with the correct formatting.
 
     ofile: output stream.
-    description: text to write
+    description_list: description list to write
     off: the offset for comments between the ! and the text.
     '''
 
-    text = description.lstrip().rstrip()
+    for description in description_list:
+        text = description.text.lstrip().rstrip()
 
-    # Remove the whitespace associated with new lines.
-    start_idx = text.find("\n")
-    while(start_idx != -1):
-        substr = "\n"
-        for end_idx in range(start_idx+1, len(text)):
-            if text[end_idx] != " ":
-                break
-            else:
-                substr += " "
-        text = text.replace(substr, " ")
+        # Remove the whitespace associated with new lines.
         start_idx = text.find("\n")
+        while(start_idx != -1):
+            substr = "\n"
+            for end_idx in range(start_idx+1, len(text)):
+                if text[end_idx] != " ":
+                    break
+                else:
+                    substr += " "
+            text = text.replace(substr, " ")
+            start_idx = text.find("\n")
 
-    # Make sure it prints in chunks of 72 - offset characters
-    start = 0
-    while (start < len(text)):
-        end = start + 72 - len(off)
-        if end > len(text):
-            end = len(text)
-        else:
-            while(text[end-1] != " " and end > start):
-                end -= 1
-        ofile.write("!"+off+text[start:end]+"\n")
-        start = end
+        # Make sure it prints in chunks of 72 - offset characters
+        start = 0
+        while (start < len(text)):
+            end = start + 72 - len(off)
+            if end > len(text):
+                end = len(text)
+            else:
+                while(text[end-1] != " " and end > start):
+                    end -= 1
+            ofile.write("!"+off+text[start:end]+"\n")
+            start = end

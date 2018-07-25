@@ -24,6 +24,14 @@ You can run the examples using the following command::
 The documentation, module files, and readers will then be available in the
 example directory.
 
+Requirements
+------------
+
+This package requires the lxml python package, which can be installed with
+pip::
+
+  pip install lxml
+
 XML File Details
 ----------------
 
@@ -63,4 +71,4 @@ Any XML file you create can be validated against the XML schema stored in
 Additional Options
 ------------------
 
-There are a few more options you might want to specify. 
+There are a few more options you might want to specify.

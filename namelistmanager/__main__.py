@@ -10,11 +10,7 @@ Usage:
 
 '''
 from sys import argv
-from documentation import create_doc
-from module import create_mod
-from readers import create_reader
-from common import create_common
-import xml.etree.ElementTree as ET
+from __init__ import Parse
 
 if __name__ == "__main__":
     if len(argv) < 5:
@@ -24,16 +20,4 @@ if __name__ == "__main__":
     mod_path = argv[3]
     read_path = argv[4]
 
-    # Read in the input file
-    try:
-        tree = ET.parse(fname)
-    except:
-        print("File could not be loaded", fname)
-        quit()
-
-    root = tree.getroot()
-    for module in root:
-        create_doc(module, doc_path)
-        create_mod(module, mod_path)
-        create_reader(module, read_path)
-    create_common(mod_path)
+    Parse(fname, doc_path, mod_path, read_path)

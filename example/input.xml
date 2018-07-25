@@ -2,84 +2,130 @@
 <!-- An example input file for processing -->
 <input>
   <group name="int2">
-    <description language="english">
-      A module storing information about how two electron integrals are
-      computed.
-    </description>
-    <element name="inttype">
-      <datatype>string</datatype>
-      <description>Algorithm for computing two electron integrals.</description>
-      <default>md4</default>
-    </element>
-    <element name="pscreen">
-      <datatype>logical</datatype>
-      <description>Whether to do screening or not.</description>
-      <default>.false.</default>
-    </element>
+    <description_list>
+      <description language="english">
+        A module storing information about how two electron integrals are
+        computed.
+      </description>
+    </description_list>
+    <element_list>
+      <element name="inttype">
+        <datatype>string</datatype>
+        <description_list>
+          <description language="english">
+            Algorithm for computing two electron integrals.
+          </description>
+        </description_list>
+        <default>md4</default>
+      </element>
+      <element name="pscreen">
+        <datatype>logical</datatype>
+        <description_list>
+          <description language="english">
+            Whether to do screening or not.
+          </description>
+        </description_list>
+        <default>.false.</default>
+      </element>
+    </element_list>
   </group>
 
   <group name="dft">
-    <description language="english">
-      A module for storing information about DFT calculations.
-    </description>
-    <element name="ctype">
-      <datatype>string</datatype>
-      <description>Type of correlation.</description>
-      <default>P86</default>
-    </element>
-    <element name="xtype">
-      <datatype>string</datatype>
-      <description>Type of exchange.</description>
-      <default>Becke</default>
-    </element>
+    <description_list>
+      <description language="english">
+        A module for storing information about DFT calculations.
+      </description>
+    </description_list>
+    <element_list>
+      <element name="ctype">
+        <datatype>string</datatype>
+        <description_list>
+          <description language="english">Type of correlation.</description>
+        </description_list>
+        <default>P86</default>
+      </element>
+      <element name="xtype">
+        <datatype>string</datatype>
+        <description_list>
+          <description language="english">Type of exchange.</description>
+        </description_list>
+        <default>Becke</default>
+      </element>
+    </element_list>
   </group>
 
   <group name="scf">
-    <description language="english">
-      A module for storing information about the scf iteration proceeds.
-      This includes options for what type of approximation to use.
-    </description>
-    <element name="scftype">
-      <datatype>string</datatype>
-      <description>Whether to do restricted or unrestricted.</description>
-      <default>rhf</default>
-    </element>
-    <element name="coulomb">
-      <datatype>string</datatype>
-      <description>How to compute the coulomb contribution.</description>
-      <default>analytic</default>
-    </element>
-    <element name="exchange">
-      <datatype>string</datatype>
-      <description>How to compute the exchange contribution.</description>
-      <default>none</default>
-    </element>
-    <element name="threshold">
-      <datatype>real(8)</datatype>
-      <description>
-        The threshold for convergence of the density matrix.
+    <description_list>
+      <description language="english">
+        A module for storing information about the scf iteration proceeds. This
+        includes options for what type of approximation to use.
       </description>
-      <default>1e-5</default>
-    </element>
-    <element name="max_iterations">
-      <datatype>integer</datatype>
-      <description>Maximum SCF iterations to perform.</description>
-      <default>100</default>
-    </element>
-    <element name="direct">
-      <datatype>logical</datatype>
-      <description>
-        Whether or not to use a direct or disk algorithm for calculations.
-      </description>
-      <default>T</default>
-    </element>
-    <element name="maxdiis">
-      <datatype>integer</datatype>
-      <description>
-        The maximum number of past density matrices to store for DIIS.
-      </description>
-      <default>4</default>
-    </element>
+    </description_list>
+    <element_list>
+      <element name="scftype">
+        <datatype>string</datatype>
+        <description_list>
+          <description language="english">
+            Whether to do restricted or unrestricted.
+          </description>
+        </description_list>
+        <default>rhf</default>
+      </element>
+      <element name="coulomb">
+        <datatype>string</datatype>
+        <description_list>
+          <description language="english">
+            How to compute the coulomb contribution.
+          </description>
+        </description_list>
+        <default>analytic</default>
+      </element>
+      <element name="exchange">
+        <datatype>string</datatype>
+        <description_list>
+          <description language="english">
+            How to compute the exchange contribution.
+          </description>
+        </description_list>
+        <default>none</default>
+      </element>
+      <element name="threshold">
+        <datatype>real(8)</datatype>
+        <description_list>
+          <description language="english">
+            The threshold for convergence of the density matrix.
+          </description>
+        </description_list>
+        <default>1e-5</default>
+      </element>
+      <element name="max_iterations">
+        <datatype>integer</datatype>
+        <description_list>
+          <description language="english">
+            Maximum SCF iterations to perform.
+          </description>
+        </description_list>
+        <default>100</default>
+      </element>
+      <element name="direct">
+        <datatype>logical</datatype>
+        <description_list>
+          <description language="english">
+            Whether or not to use a direct or disk algorithm for calculations.
+          </description>
+        </description_list>
+        <default>T</default>
+      </element>
+      <element name="maxdiis">
+        <datatype>integer</datatype>
+        <description_list>
+          <description language="english">
+            The maximum number of past density matrices to store for DIIS.
+          </description>
+        </description_list>
+        <default>4</default>
+      </element>
+    </element_list>
   </group>
 
 </input>

@@ -93,9 +93,7 @@ def variable_list(module):
     module: the module to process.
     '''
     member_list = []
-    for member in module:
-        if member.tag == "description":
-            continue
+    for member in module.find("element_list"):
         member_list.append(member.attrib["name"].upper())
     return member_list
 

@@ -1,0 +1,50 @@
+<?xml version = "1.1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="input">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="group" type="GroupType" minOccurs="1"
+          maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="GroupType">
+    <xs:all>
+      <xs:element name="description_list" type="DescriptionList"/>
+      <xs:element name="element_list" type="ElementList"/>
+    </xs:all>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ElementList">
+    <xs:sequence>
+      <xs:element name="element" type="ElementType" minOccurs="1"
+         maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ElementType">
+    <xs:all>
+      <xs:element name="description_list" type="DescriptionList"/>
+      <xs:element name="datatype" type="xs:string"/>
+      <xs:element name="default" type="xs:string"/>
+    </xs:all>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="DescriptionList">
+    <xs:sequence>
+      <xs:element name="description" type="DescriptionType" minOccurs="1"
+         maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DescriptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="language" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>
