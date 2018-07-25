@@ -5,6 +5,7 @@ associated with each namelist entry.
 
 from .helpers import off, offcom, offlabel, offcont
 
+
 def create_reader(module, output_path):
     '''Create the reader file associated with a given module.
 
@@ -24,7 +25,7 @@ def create_reader(module, output_path):
     txt = "Reads in the data associated with " + mod_name.upper() + "Module"
     ofile.write("!" + offcom + txt + "\n")
     ofile.write(off + "SUBROUTINE " + mod_name.upper() + "Reader")
-    ofile.write("(fname)\n")
+    ofile.write("(verbose, fname)\n")
     ofile.write("!\n")
 
     # Use Statements
@@ -40,7 +41,11 @@ def create_reader(module, output_path):
     ofile.write("!\n")
 
     # Input variables
+    ofile.write("!" + offcom + "The file name.\n")
     ofile.write(off + "CHARACTER(len=*), INTENT(IN) :: fname\n")
+    ofile.write("!" + offcom +
+                "Set to true if we should print out the values (default=F).\n")
+    ofile.write(off + "LOGICAL, INTENT(IN) :: verbose\n")
     ofile.write("!\n")
 
     # Helper Variables
@@ -48,7 +53,7 @@ def create_reader(module, output_path):
     ofile.write("!\n")
 
     # The namelist
-    ofile.write(off + "NAMELIST /"+mod_name.upper()+"/ &\n")
+    ofile.write(off + "NAMELIST /" + mod_name.upper() + "/ &\n")
     write_list(ofile, entry_list, offcont)
     ofile.write("!\n")
 
@@ -56,30 +61,33 @@ def create_reader(module, output_path):
     default_values(ofile, module.find("element_list"))
 
     # Open the file
-    ofile.write("!"+offcom+"Open the input file\n")
+    ofile.write("!" + offcom + "Open the input file\n")
     txt = "OPEN(UNIT=IO, FILE=fname, STATUS='OLD', " + \
           "ACCESS='SEQUENTIAL', ERR=100)\n"
-    ofile.write(off+txt)
+    ofile.write(off + txt)
     ofile.write("!\n")
 
     # Read the namelist
-    ofile.write("!"+offcom+"Read The Name List\n")
-    ofile.write(off+"READ(IO, "+mod_name.upper()+", ERR=100)\n")
+    ofile.write("!" + offcom + "Read The Name List\n")
+    ofile.write(off + "READ(IO, " + mod_name.upper() + ", ERR=100)\n")
     ofile.write("!\n")
 
     # Close The Input File
-    ofile.write("!"+offcom+"Cleanup\n")
-    ofile.write(off+"CLOSE(IO)\n")
-    ofile.write(off+"GO TO 200\n")
-    ofile.write("!\n")
+    ofile.write("!" + offcom + "Cleanup\n")
+    ofile.write(off + "CLOSE(IO)\n")
+
+    # Punch Out Values
+    punch_out(ofile, module.find("element_list"))
 
     # Error Handling At The End
-    ofile.write("!"+offcom+"Error Handling\n")
-    ofile.write(offlabel+"100 CONTINUE\n")
-    ofile.write(off+"CALL HandleError(fname)\n")
+    ofile.write(off + "GO TO 200\n")
+    ofile.write("!\n")
+    ofile.write("!" + offcom + "Error Handling\n")
+    ofile.write(offlabel + "100 CONTINUE\n")
+    ofile.write(off + "CALL HandleError(fname)\n")
 
     # Footer
-    ofile.write(offlabel+"200 CONTINUE\n")
+    ofile.write(offlabel + "200 CONTINUE\n")
     ofile.write("!\n")
     ofile.write(off + "END SUBROUTINE " + mod_name.upper() + "Reader\n")
 
@@ -124,18 +132,34 @@ def write_list(ofile, text, off):
         else:
             ofile.write("\n")
 
+
 def default_values(ofile, module):
     '''Write code to fill in all the default values of variables.
 
     ofile: file stream to write to.
     module: module to write.
     '''
-    ofile.write("!"+offcom+"Fill in the default values.\n")
+    ofile.write("!" + offcom + "Fill in the default values.\n")
     for element in module:
-        ofile.write(off+element.attrib["name"] + " = ")
+        ofile.write(off + element.attrib["name"] + " = ")
         if element.find("datatype").text != "string":
             ofile.write(element.find("default").text)
         else:
-            ofile.write("\""+element.find("default").text+"\"")
+            ofile.write("\"" + element.find("default").text + "\"")
         ofile.write("\n")
+    ofile.write("!\n")
+
+def punch_out(ofile, module):
+    '''Write code to write values to the console.
+
+    ofile: file stream to write to.
+    module: module to write.
+    '''
+    ofile.write("!" + offcom + "Punch Out Values.\n")
+    ofile.write(off+"IF (verbose) THEN\n")
+    for element in module:
+        ofile.write(off + offcont + "WRITE(*,*) ")
+        ofile.write("\"o "+element.attrib["name"]+" \", ")
+        ofile.write(element.attrib["name"] + "\n")
+    ofile.write(off+"END IF\n")
     ofile.write("!\n")

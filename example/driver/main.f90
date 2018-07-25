@@ -5,7 +5,7 @@
 !
       IMPLICIT NONE
 !
-      CALL SCFReader("input.nml")
+      CALL SCFReader(.TRUE., "input.nml")
 !
       WRITE(*,"(A I4)") "Max iterations was specified: ", max_iterations
       WRITE(*,"(A A)") "Coulomb was specified: ", coulomb
