@@ -28,12 +28,12 @@ def create_reader(module, output_path):
     txt = "Reads in the data associated with " + mod_name.upper() + "Module"
     ofile.write("!" + offcom + txt + "\n")
     ofile.write(off + "SUBROUTINE " + mod_name.upper() + "Reader")
-    ofile.write("(input_file)\n")
+    ofile.write("(fname)\n")
     ofile.write("!\n")
 
     # Use Statements
     ofile.write(off + "USE IOCommonModule, ONLY : HandleError, fname_len\n")
-    ofile.write(off + "USE " + mod_name.upper() + "Module, ONLY : &\n")
+    ofile.write(off + "USE " + mod_name.upper() + "InputModule, ONLY : &\n")
     entry_list = variable_list(module)
     entry_list = ", ".join(entry_list)
     write_list(ofile, entry_list, offcont)
@@ -77,7 +77,7 @@ def create_reader(module, output_path):
     # Error Handling At The End
     ofile.write("!"+offcom+"Error Handling\n")
     ofile.write(offlabel+"100 CONTINUE\n")
-    ofile.write(off+"CALL HandleError(input_file)\n")
+    ofile.write(off+"CALL HandleError(fname)\n")
 
     # Footer
     ofile.write(offlabel+"200 CONTINUE\n")

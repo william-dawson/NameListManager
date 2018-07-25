@@ -44,7 +44,7 @@ def create_common(output_path):
     ofile.write(off + "CHARACTER(len=fname_len), INTENT(IN) :: fname\n")
     ofile.write("!\n")
     ofile.write(off + "WRITE(*,*) \"Problem with file \", fname\n")
-    ofile.write(off + "EXIT\n")
+    ofile.write(off + "CALL EXIT(-1)\n")
     ofile.write("!\n")
     ofile.write(off + "END SUBROUTINE HandleError\n")
 
