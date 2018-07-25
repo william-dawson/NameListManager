@@ -11,4 +11,10 @@ setup(name='namelistmanager',
       zip_safe=False,
       install_requires=[
           'lxml',
-      ])
+      ],
+      entry_points={
+        'console_scripts': [
+          'namelistmanager = namelistmanager.__main__:main'
+        ]
+      },
+      python_requires=">=3.0")

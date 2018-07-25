@@ -10,9 +10,9 @@ Usage:
 
 '''
 from sys import argv
-from __init__ import Parse
+from .__init__ import Parse
 
-if __name__ == "__main__":
+def main():
     if len(argv) < 5:
         raise Exception("Incorrect input parameters.")
     fname = argv[1]
@@ -21,3 +21,6 @@ if __name__ == "__main__":
     read_path = argv[4]
 
     Parse(fname, doc_path, mod_path, read_path)
+
+if __name__ == "__main__":
+    main()

@@ -13,24 +13,27 @@ xml file, and it automatically generates:
 -   Reader subroutines that read in data from a namelist specifying input
     values.
 
-You run the program as::
+You install the program as::
 
-  python namelistmanager input.xml doc_path mod_path read_path
+  pip install .
+
+And then run it like::
+
+  namelistmanager input.xml doc_path mod_path read_path (language) (mpi)
 
 You can run the examples using the following command::
 
-  python namelistmanager example/input.xml example/doc example/module example/readers
+  namelistmanager example/input.xml example/doc example/module example/readers
 
 The documentation, module files, and readers will then be available in the
-example directory.
+example directory. The documentation files are restructed text, which means
+you could easily add them to a Sphinx project
 
 Requirements
 ------------
 
-This package requires the lxml python package, which can be installed with
-pip::
-
-  pip install lxml
+This package requires Python 3.0 and up. It also depends on the lxml package,
+which pip will automatically install.
 
 XML File Details
 ----------------
@@ -81,4 +84,8 @@ Any XML file you create can be validated against the XML schema stored in
 Additional Options
 ------------------
 
-There are a few more options you might want to specify.
+There are a few optional parameters you might want to specify. First, the
+language option will make sure to use the descriptions specified in the target
+language. If not language is specified, "en" for english is the default.
+Second, you can specify whether to generate MPI safe input handling. This
+mainly affects how error handling is performed.

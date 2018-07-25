@@ -3,10 +3,10 @@ The driver routine for generating the documents.
 
 
 '''
-from documentation import create_doc
-from modules import create_mod
-from readers import create_reader
-from common import create_common
+from .documentation import create_doc
+from .modules import create_mod
+from .readers import create_reader
+from .common import create_common
 from lxml import etree
 
 

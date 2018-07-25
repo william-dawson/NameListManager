@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- An example input file for processing -->
 <input>
+  
   <group name="int2">
     <description_list>
       <description language="en">
         A module storing information about how two electron integrals are
         computed.
+      </description>
+      <description language="es">
+        Un módulo que guarda información sobre cómo dos integrales
+        electrónicas son calculado.
       </description>
     </description_list>
     <element_list>
