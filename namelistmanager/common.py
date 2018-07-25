@@ -1,12 +1,10 @@
-'''
-This file contains the code needed to generate the common module used to
+'''This file contains the code needed to generate the common module used to
 support the readers.
 '''
 
 
-def create_common(output_path):
-    '''
-    Creates the common module.
+def create_common(output_path, mpi):
+    '''Creates the common module.
 
     output_path: pass the path to the modules.
     '''

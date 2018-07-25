@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- An example input file for processing -->
 <input>
-  
+
   <group name="int2">
     <description_list>
       <description language="en">
@@ -17,8 +17,8 @@
       <element name="inttype">
         <datatype>string</datatype>
         <description_list>
-          <description language="en">
-            Algorithm for computing two electron integrals.
+          <description language="fr">
+            Algorithme pour calculer deux intégrales d'électrons.
           </description>
         </description_list>
         <default>md4</default>

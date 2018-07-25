@@ -5,8 +5,7 @@ associated with each namelist entry.
 
 
 def create_reader(module, output_path):
-    '''
-    Create the reader file associated with a given module.
+    '''Create the reader file associated with a given module.
 
     module: a tree of elements associated with that module.
     output_path: path to where we should put the output file.
@@ -101,8 +100,8 @@ def variable_list(module):
 
 
 def write_list(ofile, text, off):
-    '''
-    A subroutine that writes out a list of variables with the correct format.
+    '''A subroutine that writes out a list of variables with the correct
+    format.
 
     ofile: output stream.
     text: list to write

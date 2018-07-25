@@ -86,6 +86,8 @@ Additional Options
 
 There are a few optional parameters you might want to specify. First, the
 language option will make sure to use the descriptions specified in the target
-language. If not language is specified, "en" for english is the default.
+language. If not language is specified, "en" for english is the default. I
+recommend using using a language code from
+`Sphinx <http://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language/>`_.
 Second, you can specify whether to generate MPI safe input handling. This
 mainly affects how error handling is performed.
