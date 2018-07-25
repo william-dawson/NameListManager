@@ -8,4 +8,7 @@ setup(name='namelistmanager',
       author_email='william.dawson@riken.jp',
       license='MIT',
       packages=['namelistmanager'],
-      zip_safe=False)
+      zip_safe=False,
+      install_requires=[
+          'lxml',
+      ])
