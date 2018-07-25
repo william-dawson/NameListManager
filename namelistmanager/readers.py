@@ -3,6 +3,7 @@ This file contains the procedures needed to generate the reader subroutines
 associated with each namelist entry.
 '''
 
+from .helpers import off, offcom, offlabel, offcont
 
 def create_reader(module, output_path):
     '''Create the reader file associated with a given module.
@@ -20,10 +21,6 @@ def create_reader(module, output_path):
         quit()
 
     # Header
-    off = " " * 6
-    offcom = " " * 5
-    offcont = " " * 4
-    offlabel = " " * 2
     txt = "Reads in the data associated with " + mod_name.upper() + "Module"
     ofile.write("!" + offcom + txt + "\n")
     ofile.write(off + "SUBROUTINE " + mod_name.upper() + "Reader")

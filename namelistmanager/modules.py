@@ -3,7 +3,7 @@ This file contains the procedures needed to generate the module files associated
 with each namelist entry.
 '''
 
-from .helpers import find_description
+from .helpers import find_description, off, offcom
 
 def create_mod(module, output_path, language):
     '''Create the module file associated with a given module.
@@ -22,8 +22,6 @@ def create_mod(module, output_path, language):
         quit()
 
     # Header
-    off = " "*6
-    offcom = " "*5
     write_comment(ofile, module.find("description_list"), offcom, language)
     ofile.write(off+"MODULE "+mod_name.upper()+"InputModule"+"\n")
     ofile.write("!\n")
