@@ -19,7 +19,7 @@ You install the program as::
 
 And then run it like::
 
-  namelistmanager input.xml doc_path mod_path read_path (language) (mpi)
+  namelistmanager input.xml doc_path mod_path read_path
 
 You can run the examples using the following command::
 
@@ -43,7 +43,7 @@ XML File Details
 The XML is used to describe the different input variables available in the
 namelist. To begin your xml file, wrap everything in the input tag::
 
-  <input>
+  <input name="project_name" lang="en" mpi="false">
   ...
   </input>
 
@@ -51,16 +51,16 @@ Inside `<input>` you can place different groups. For each group, a module
 will be created to store the data of that group, and a reader for that group
 as well. Each group is identified by the name attribute::
 
-  <group name="groupa">
+  <group name="matrixmultiplication">
   </group>
 
 Inside each group, you need to provide a list of descriptions of that group::
 
   <description_list>
-    <description language="en">
-      Description.
+    <description xml:lang="en">
+      The parameters for performing matrix multiplication.
     </description>
-    <description language="ja">
+    <description xml:lang="ja">
       説明
     </description>
   </description_list>
@@ -71,12 +71,12 @@ description of that variable. You also need to specify the data type and
 the default value::
 
   <element_list>
-    <element name="">
+    <element name="block_size">
       <description_list>
-        <description language="en"></description>
+        <description xml:lang="en">Size of blocks.</description>
       </description_list>
-      <datatype></datatype>
-      <default></default>
+      <datatype>integer</datatype>
+      <default>64</default>
     </element>
   </element_list>
 
@@ -86,10 +86,6 @@ Any XML file you create can be validated against the XML schema stored in
 Additional Options
 ------------------
 
-There are a few optional parameters you might want to specify. First, the
-language option will make sure to use the descriptions specified in the target
-language. If not language is specified, "en" for english is the default. I
-recommend using using a language code from
-`Sphinx <http://www.sphinx-doc.org/en/master/usage/configuration.html#confval-language/>`_.
-Second, you can specify whether to generate MPI safe input handling. This
-mainly affects how error handling is performed.
+The default language can be specified using the lang attribute in the
+input element. You can also specify whether to generate MPI safe input handling.
+This mainly affects how error handling is performed.

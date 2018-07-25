@@ -12,7 +12,7 @@ def find_description(description_list, language):
     '''
     found = False
     for description in description_list:
-        if description.attrib["language"] == language:
+        if description.attrib["lang"] == language:
             found = True
             break
     if not found and language != "en":

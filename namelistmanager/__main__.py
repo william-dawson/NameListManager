@@ -6,8 +6,6 @@ Usage:
     doc_path : path to where the documentation should be placed.
     module_path : path to where the module files should be placed.
     read_path : path to where the reader source code should be placed.
-    language : what language to use (optional, default="en").
-    mpi : 1 if you want mpi support (optional, default="0").
 '''
 from sys import argv
 from .__init__ import Parse
@@ -24,17 +22,7 @@ def main():
     mod_path = argv[3]
     read_path = argv[4]
 
-    # Optional Parameters
-    if len(argv) > 5:
-        language = argv[5]
-    else:
-        language = None
-    if len(argv) > 6:
-        mpi = int(argv[6])
-    else:
-        mpi = None
-
-    Parse(fname, doc_path, mod_path, read_path, language, mpi)
+    Parse(fname, doc_path, mod_path, read_path)
 
 
 if __name__ == "__main__":

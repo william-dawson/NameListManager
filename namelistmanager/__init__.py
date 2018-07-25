@@ -10,7 +10,7 @@ from .common import create_common
 from lxml import etree
 
 
-def Parse(fname, doc_path, mod_path, read_path, language=None, mpi=None):
+def Parse(fname, doc_path, mod_path, read_path):
     '''
     Parse an xml file and generate all the code.
 
@@ -33,10 +33,16 @@ def Parse(fname, doc_path, mod_path, read_path, language=None, mpi=None):
     xmlschema.assertValid(tree)
 
     # Optional parameters
-    if not language:
+    if "lang" in root.attrib.keys():
+        language = root.attrib["lang"]
+    else:
         language = "en"
-    if not mpi:
-        mpi = 0
+
+    if "mpi" in root.attrib.keys():
+        mpi = (root.attrib["mpi"].lower() ==
+               "true" or root.attrib["mpi"] == "1")
+    else:
+        mpi = False
 
     # Run the generators
     for module in root:

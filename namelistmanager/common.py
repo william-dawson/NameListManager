@@ -52,13 +52,13 @@ def write_error_handler(ofile, mpi):
     ofile.write(off + "SUBROUTINE HandleError(fname)\n")
     ofile.write("!\n")
     ofile.write(off + "CHARACTER(len=*), INTENT(IN) :: fname\n")
-    if mpi == 1:
+    if mpi:
         ofile.write(off + "INTEGER :: ierr\n")
     ofile.write("!\n")
     ofile.write(off + "WRITE(*,*) \"Problem with file \", fname\n")
-    if mpi == 0:
+    if not mpi:
         ofile.write(off + "CALL EXIT(-1)\n")
-    elif mpi == 1:
+    else:
         ofile.write(off + "CALL MPI_Abort(ierr, -1)\n")
     ofile.write("!\n")
     ofile.write(off + "END SUBROUTINE HandleError\n")
