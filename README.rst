@@ -46,27 +46,37 @@ Inside `<input>` you can place different groups. For each group, a module
 will be created to store the data of that group, and a reader for that group
 as well. Each group is identified by the name attribute::
 
-  <group name="">
+  <group name="groupa">
   </group>
 
-Inside each group, you need to provide a description of that group.
+Inside each group, you need to provide a list of descriptions of that group::
 
-  <description>
-  </description>
+  <description_list>
+    <description language="en">
+      Description.
+    </description>
+    <description language="ja">
+      説明
+    </description>
+  </description_list>
 
 Next you specify the elements of that group. The variable name associated with
 that element is based on the name attribute. Each element also requires a
 description of that variable. You also need to specify the data type and
 the default value::
 
-  <element name="">
-    <description></description>
-    <datatype></datatype>
-    <default></default>
-  </element>
+  <element_list>
+    <element name="">
+      <description_list>
+        <description language="en"></description>
+      </description_list>
+      <datatype></datatype>
+      <default></default>
+    </element>
+  </element_list>
 
 Any XML file you create can be validated against the XML schema stored in
-`namelist.xsd` .
+`namelistmanager/namelist.xsd` .
 
 Additional Options
 ------------------
