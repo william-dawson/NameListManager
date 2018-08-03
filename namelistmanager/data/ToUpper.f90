@@ -10,7 +10,7 @@
 !
       offset = ICHAR('A') - ICHAR('a')
       DO II = 1, strlen
-         IF (string(II:II) .GT. 'a' .AND. string(II:II) .LE. 'z') THEN
+         IF (string(II:II) .GE. 'a' .AND. string(II:II) .LE. 'z') THEN
             string(II:II) = CHAR(ICHAR(string(II:II)) + offset)
          END IF
       END DO

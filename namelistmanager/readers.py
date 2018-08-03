@@ -29,7 +29,8 @@ def create_reader(module, output_path):
     ofile.write("!\n")
 
     # Use Statements
-    ofile.write(off + "USE IOCommonModule, ONLY : HandleError\n")
+    ofile.write(off + "USE IOCommonModule, ONLY : HandleError, ToUpper\n")
+    ofile.write(off + "USE IOCommonModule, ONLY : instr_len\n")
     ofile.write(off + "USE " + mod_name.upper() + "InputModule, ONLY : &\n")
     entry_list = variable_list(module)
     entry_list = ", ".join(entry_list)
@@ -75,6 +76,9 @@ def create_reader(module, output_path):
     # Close The Input File
     ofile.write("!" + offcom + "Cleanup\n")
     ofile.write(off + "CLOSE(IO)\n")
+
+    # Convert the strings to upper case
+    to_upper(ofile, module.find("element_list"))
 
     # Punch Out Values
     punch_out(ofile, module.find("element_list"))
@@ -149,6 +153,21 @@ def default_values(ofile, module):
         ofile.write("\n")
     ofile.write("!\n")
 
+
+def to_upper(ofile, module):
+    '''Write code to convert all input to upper case.
+
+    ofile: file stream to write to.
+    module: module to write.
+    '''
+    ofile.write("!" + offcom + "Convert strings to upper case.\n")
+    for element in module:
+        if not element.find("datatype").text == "string":
+            continue
+        ofile.write(off + offcont + "CALL ToUpper(")
+        ofile.write(element.attrib["name"]+", instr_len)\n")
+    ofile.write("!\n")
+
 def punch_out(ofile, module):
     '''Write code to write values to the console.
 
@@ -156,10 +175,10 @@ def punch_out(ofile, module):
     module: module to write.
     '''
     ofile.write("!" + offcom + "Punch Out Values.\n")
-    ofile.write(off+"IF (verbose) THEN\n")
+    ofile.write(off + "IF (verbose) THEN\n")
     for element in module:
         ofile.write(off + offcont + "WRITE(*,*) ")
-        ofile.write("\"o "+element.attrib["name"]+" \", ")
+        ofile.write("\"o " + element.attrib["name"] + " \", ")
         ofile.write(element.attrib["name"] + "\n")
-    ofile.write(off+"END IF\n")
+    ofile.write(off + "END IF\n")
     ofile.write("!\n")
