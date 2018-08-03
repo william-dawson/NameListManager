@@ -31,8 +31,8 @@ def create_doc(module, output_path, language):
         ofile.write(head + "\n")
         ofile.write("-" * len(head) + "\n")
         write_description(ofile, member.find("description_list"), language)
-        ofile.write("  - Default: " + member.find("default").text + "\n")
-        ofile.write("  - DataType: " + member.find("datatype").text + "\n")
+        ofile.write("- Default: " + member.find("default").text + "\n")
+        ofile.write("- DataType: " + member.find("datatype").text + "\n")
         ofile.write("\n")
 
     # Cleanup
