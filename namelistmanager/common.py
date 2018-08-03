@@ -30,10 +30,14 @@ def create_common(output_path, mpi):
 
     # Subroutines
     ofile.write(off + "CONTAINS\n")
-    ofile.write("!\n")
 
     # Error Handler
+    ofile.write("!\n")
     write_error_handler(ofile, mpi)
+
+    # String Helper
+    ofile.write("!\n")
+    write_to_upper(ofile)
 
     # Footer
     ofile.write("!\n")
@@ -43,22 +47,33 @@ def create_common(output_path, mpi):
     ofile.close()
 
 def write_error_handler(ofile, mpi):
-    '''This subroutine will
+    '''This subroutine will write the sourcecode for the error handler.
 
     ofile: file to write to.
     mpi: 1 if you want to use mpi, 0 otherwise.
     '''
-    ofile.write("!" + offcom + "If there is an I/O error, call this routine.\n")
-    ofile.write(off + "SUBROUTINE HandleError(fname)\n")
-    ofile.write("!\n")
-    ofile.write(off + "CHARACTER(len=*), INTENT(IN) :: fname\n")
+    from pkg_resources import resource_filename
+
     if mpi:
-        ofile.write(off + "INTEGER :: ierr\n")
-    ofile.write("!\n")
-    ofile.write(off + "WRITE(*,*) \"Problem with file \", fname\n")
-    if not mpi:
-        ofile.write(off + "CALL EXIT(-1)\n")
+        ename = "ErrorHandlerMPI.f90"
     else:
-        ofile.write(off + "CALL MPI_Abort(ierr, -1)\n")
-    ofile.write("!\n")
-    ofile.write(off + "END SUBROUTINE HandleError\n")
+        ename = "ErrorHandler.f90"
+    code_file = resource_filename('namelistmanager', 'data/'+ename)
+
+    with open(code_file, "r") as ifile:
+        for line in ifile:
+            ofile.write(line)
+
+def write_to_upper(ofile):
+    '''This subroutine will write the helper that converts strings to upper
+    case.
+
+    ofile: file to write to.
+    '''
+    from pkg_resources import resource_filename
+
+    code_file = resource_filename('namelistmanager', 'data/ToUpper.f90')
+
+    with open(code_file, "r") as ifile:
+        for line in ifile:
+            ofile.write(line)
