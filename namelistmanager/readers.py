@@ -76,6 +76,7 @@ def create_reader(module, output_path):
     # Close The Input File
     ofile.write("!" + offcom + "Cleanup\n")
     ofile.write(off + "CLOSE(IO)\n")
+    ofile.write("!\n")
 
     # Convert the strings to upper case
     to_upper(ofile, module.find("element_list"))
@@ -164,7 +165,7 @@ def to_upper(ofile, module):
     for element in module:
         if not element.find("datatype").text == "string":
             continue
-        ofile.write(off + offcont + "CALL ToUpper(")
+        ofile.write(off + "CALL ToUpper(")
         ofile.write(element.attrib["name"]+", instr_len)\n")
     ofile.write("!\n")
 
