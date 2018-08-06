@@ -32,6 +32,7 @@
       <xs:element name="description_list" type="DescriptionList"/>
       <xs:element name="datatype" type="xs:string"/>
       <xs:element name="default" type="xs:string"/>
+      <xs:element name="valid" type="valid_list" minOccurs="0" />
     </xs:all>
     <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
@@ -50,4 +51,8 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="valid_list">
+    <xs:list itemType="xs:string" />
+  </xs:simpleType>
 </xs:schema>

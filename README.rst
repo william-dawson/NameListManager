@@ -80,6 +80,11 @@ the default value::
     </element>
   </element_list>
 
+You can optionally add to an element a semi-colon separated list of valid values
+for the input::
+
+  <valid>1;2;3;any power of two</valid>
+
 Any XML file you create can be validated against the XML schema stored in
 `namelistmanager/namelist.xsd` .
 

@@ -49,6 +49,7 @@
         <description_list>
           <description lang="en">Type of correlation.</description>
         </description_list>
+        <valid>P86;LYP;PBE</valid>
         <default>P86</default>
       </element>
       <element name="xtype">
@@ -57,6 +58,7 @@
           <description lang="en">Type of exchange.</description>
         </description_list>
         <default>Becke</default>
+        <valid>Becke;PW91;PBE</valid>
       </element>
     </element_list>
   </group>

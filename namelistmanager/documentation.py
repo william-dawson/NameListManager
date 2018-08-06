@@ -34,6 +34,10 @@ def create_doc(module, output_path, language):
         ofile.write("\n")
         ofile.write("- Default: " + member.find("default").text + "\n")
         ofile.write("- DataType: " + member.find("datatype").text + "\n")
+        for valid_list in member.findall("valid"):
+            ofile.write("- Valid Values:\n")
+            for valid in valid_list.text.split(";"):
+                ofile.write("  - "+valid+"\n")
         ofile.write("\n")
 
     # Cleanup
