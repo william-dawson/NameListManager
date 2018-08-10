@@ -150,7 +150,10 @@ def default_values(ofile, module):
         if element.find("datatype").text != "string":
             ofile.write(element.find("default").text)
         else:
-            ofile.write("\"" + element.find("default").text + "\"")
+            try:
+                ofile.write("\"" + element.find("default").text + "\"")
+            except:
+                ofile.write("\"\"")
         ofile.write("\n")
     ofile.write("!\n")
 

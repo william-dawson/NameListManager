@@ -32,12 +32,15 @@ def create_doc(module, output_path, language):
         ofile.write("-" * len(head) + "\n")
         write_description(ofile, member.find("description_list"), language)
         ofile.write("\n")
-        ofile.write("- Default: " + member.find("default").text + "\n")
+        try:
+            ofile.write("- Default: " + member.find("default").text + "\n")
+        except:
+            ofile.write("- Default: \"\"\n")
         ofile.write("- DataType: " + member.find("datatype").text + "\n")
         for valid_list in member.findall("valid"):
-            ofile.write("- Valid Values:\n")
+            ofile.write("- Valid Values:\n\n")
             for valid in valid_list.text.split(";"):
-                ofile.write("  - "+valid+"\n")
+                ofile.write("  - "+valid.lstrip().rstrip()+"\n")
         ofile.write("\n")
 
     # Cleanup
