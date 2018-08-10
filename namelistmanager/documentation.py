@@ -4,6 +4,7 @@ the xml file.
 
 from .helpers import find_description
 
+
 def create_doc(module, output_path, language):
     '''Create the documentation associated with a given module.
 
@@ -40,7 +41,9 @@ def create_doc(module, output_path, language):
         for valid_list in member.findall("valid_list"):
             ofile.write("- Valid Values:\n\n")
             for valid in valid_list.findall("valid"):
-                ofile.write("  - "+valid.text.lstrip().rstrip()+"\n")
+                valid_value = valid.attrib["name"]
+                ofile.write("  - " + valid_value + " : " +
+                            valid.text.lstrip().rstrip() + "\n")
         ofile.write("\n")
 
     # Cleanup
