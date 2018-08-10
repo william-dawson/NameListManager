@@ -49,7 +49,11 @@
         <description_list>
           <description lang="en">Type of correlation.</description>
         </description_list>
-        <valid>P86;LYP;PBE</valid>
+        <valid_list>
+          <valid name="P86">P86 Density Functional</valid>
+          <valid name="LYP">LYP Density Functional</valid>
+          <valid name="PBE">PBE Density Functional</valid>
+        </valid_list>
         <default>P86</default>
       </element>
       <element name="xtype">
@@ -57,8 +61,12 @@
         <description_list>
           <description lang="en">Type of exchange.</description>
         </description_list>
+        <valid_list>
+          <valid name="Becke">Becke Density Functional</valid>
+          <valid name="PW91">PW91 Density Functional</valid>
+          <valid name="PBE">PBE Density Functional</valid>
+        </valid_list>
         <default>Becke</default>
-        <valid>Becke;PW91;PBE</valid>
       </element>
     </element_list>
   </group>

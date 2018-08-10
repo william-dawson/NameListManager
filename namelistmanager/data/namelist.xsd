@@ -3,8 +3,7 @@
   <xs:element name="input">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="group" type="GroupType" minOccurs="1"
-          maxOccurs="unbounded"/>
+        <xs:element name="group" type="GroupType" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="name" type="xs:string"/>
       <xs:attribute name="lang" type="xs:string"/>
@@ -22,8 +21,7 @@
 
   <xs:complexType name="ElementList">
     <xs:sequence>
-      <xs:element name="element" type="ElementType" minOccurs="1"
-         maxOccurs="unbounded"/>
+      <xs:element name="element" type="ElementType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -32,15 +30,14 @@
       <xs:element name="description_list" type="DescriptionList"/>
       <xs:element name="datatype" type="xs:string"/>
       <xs:element name="default" type="xs:string"/>
-      <xs:element name="valid" type="valid_list" minOccurs="0" />
+      <xs:element name="valid_list" type="ValidList" minOccurs="0" />
     </xs:all>
     <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="DescriptionList">
     <xs:sequence>
-      <xs:element name="description" type="DescriptionType" minOccurs="1"
-         maxOccurs="unbounded"/>
+      <xs:element name="description" type="DescriptionType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -52,7 +49,17 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:simpleType name="valid_list">
-    <xs:list itemType="xs:string" />
-  </xs:simpleType>
+  <xs:complexType name="ValidList">
+    <xs:sequence>
+      <xs:element name="valid" type="ValidType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ValidType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 </xs:schema>
